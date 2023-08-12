@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d41c9f07df38944ea125eb17fd574a9, type: 3}
+  m_Name: Turn1
+  m_EditorClassIdentifier: 
+  tiles:
+  - {fileID: 11400000, guid: 377a32988e34ef74ca10bf78c38c1a6a, type: 2}
+  - {fileID: 11400000, guid: bb46280a602d2094a99c4c0e5ac8b8f1, type: 2}
+  - {fileID: 11400000, guid: 3310229992bdf0a43b98d1c0e7922443, type: 2}
+  isStart: 0
+  exits: 0300000005000000

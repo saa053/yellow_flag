@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d41c9f07df38944ea125eb17fd574a9, type: 3}
+  m_Name: Hairpin4
+  m_EditorClassIdentifier: 
+  tiles:
+  - {fileID: 11400000, guid: 703b51c0e9e89214592503cbd5a3b9c0, type: 2}
+  - {fileID: 11400000, guid: 7bdb2d02f4d2d49438f48811c313ac2d, type: 2}
+  isStart: 0
+  exits: 0100000002000000
