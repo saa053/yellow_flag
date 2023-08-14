@@ -15,4 +15,5 @@ MonoBehaviour:
   tiles:
   - {fileID: 11400000, guid: f34070d16d659bf4e821d0ef5dc20d7b, type: 2}
   isStart: 1
+  isTrack: 1
   exits: 0500000002000000

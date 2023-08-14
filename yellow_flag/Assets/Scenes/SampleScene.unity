@@ -123,6 +123,56 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &249658841
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 249658843}
+  - component: {fileID: 249658842}
+  m_Layer: 0
+  m_Name: TrackBuilder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &249658842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 249658841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e56caca6fae3ced47ad84a4a1595cced, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tileManager: {fileID: 429885293}
+  trackTilesPos: []
+  buildCompleted: 0
+  drawTrackWithGizmos: 1
+  circleRadius: 0.3
+  delay: 0.1
+--- !u!4 &249658843
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 249658841}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.47275397, y: 1.2926186, z: 0.018078625}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &429885292
 GameObject:
   m_ObjectHideFlags: 0
@@ -134,7 +184,7 @@ GameObject:
   - component: {fileID: 429885294}
   - component: {fileID: 429885293}
   m_Layer: 0
-  m_Name: MapManager
+  m_Name: TileManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -152,7 +202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f4e56558f1b9044685d2851c93a152a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  map: {fileID: 725461556}
+  tilemap: {fileID: 725461556}
   tileDatas:
   - {fileID: 11400000, guid: 14afa7d30270e704197516eae24789f4, type: 2}
   - {fileID: 11400000, guid: 0d10cd3a9fbaea04898a57226d9974a4, type: 2}
@@ -175,10 +225,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 09fe06a146808fc4993dbae3a738f644, type: 2}
   - {fileID: 11400000, guid: 2333957e2aa921c41aab5125c3e74a40, type: 2}
   - {fileID: 11400000, guid: cd593e2c89d2429448451616441d2ed1, type: 2}
-  drawTrackWithGizmos: 0
-  trackTiles: []
-  circleRadius: 0.3
-  delay: 0.1
 --- !u!4 &429885294
 Transform:
   m_ObjectHideFlags: 0
@@ -18736,6 +18782,30 @@ MonoBehaviour:
       m_Data: []
     m_ObjectData:
       m_Data: []
+  - m_EditModeType: 1
+    m_Knots: []
+    m_MetaData: []
+    m_Closed: 0
+    m_IntData:
+      m_Data: []
+    m_FloatData:
+      m_Data: []
+    m_Float4Data:
+      m_Data: []
+    m_ObjectData:
+      m_Data: []
+  - m_EditModeType: 1
+    m_Knots: []
+    m_MetaData: []
+    m_Closed: 0
+    m_IntData:
+      m_Data: []
+    m_FloatData:
+      m_Data: []
+    m_Float4Data:
+      m_Data: []
+    m_ObjectData:
+      m_Data: []
   m_Knots:
     m_KnotsLink: []
 --- !u!4 &1295976263
@@ -18765,8 +18835,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c373733e4ab79c49947152dc7aff72f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  map: {fileID: 725461556}
-  mapManager: {fileID: 429885293}
+  tileManager: {fileID: 429885293}
+  track: {fileID: 249658842}
 --- !u!1 &1460819536
 GameObject:
   m_ObjectHideFlags: 0
@@ -18820,3 +18890,4 @@ SceneRoots:
   - {fileID: 1460819538}
   - {fileID: 429885294}
   - {fileID: 1295976263}
+  - {fileID: 249658843}

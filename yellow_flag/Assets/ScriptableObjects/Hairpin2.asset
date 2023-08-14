@@ -16,4 +16,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cc36b5d0651027a4f93027d3ca81ea13, type: 2}
   - {fileID: 11400000, guid: 20a36b6ba49f0c6409061b4c8748f73d, type: 2}
   isStart: 0
+  isTrack: 1
   exits: 0000000005000000
