@@ -13,6 +13,7 @@ public class TileData : ScriptableObject {
 
     public bool isTrack;
 
-    public int[] exits; // An exit is a hexagon side. Exit 0 is on top and then it moves clockwise.
+    public int[] exits; // An exit is a hexagon side, where the road on a track tile ends. Exit 0 is on top and then it moves clockwise.
 
+    public Vector3 checkpoint;
 }

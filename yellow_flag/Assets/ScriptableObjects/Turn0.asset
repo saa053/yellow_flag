@@ -19,3 +19,4 @@ MonoBehaviour:
   isStart: 0
   isTrack: 1
   exits: 0200000004000000
+  checkpoint: {x: 0.12, y: 0, z: 0}

@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Numerics;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -70,12 +69,12 @@ public class TileManager : MonoBehaviour
     }
 
     // Translate tilemap position to world position
-    public UnityEngine.Vector3 CellToWorld(Vector3Int tilePos) {
+    public Vector3 CellToWorld(Vector3Int tilePos) {
         return tilemap.CellToWorld(tilePos);
     }
 
     // Translate world position to tilemap position
-    public UnityEngine.Vector3 WorldToCell(UnityEngine.Vector3 pos) {
+    public Vector3 WorldToCell(Vector3 pos) {
         return tilemap.WorldToCell(pos);
     }
 }
