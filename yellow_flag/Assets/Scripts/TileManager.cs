@@ -77,5 +77,14 @@ public class TileManager : MonoBehaviour
     public Vector3 WorldToCell(Vector3 pos) {
         return tilemap.WorldToCell(pos);
     }
+
+    public Vector3 GetCheckpoint(Vector3Int tilePos) {
+        TileBase tile = tilemap.GetTile(tilePos);
+        float rotationAngle = dataFromTiles[tile].rotationAngle;
+
+        Quaternion rotationQuaternion = Quaternion.Euler(0f, 0f, -rotationAngle);
+        Vector3 checkpoint = rotationQuaternion * dataFromTiles[tile].checkpoint;
+        return checkpoint;
+    }
 }
 

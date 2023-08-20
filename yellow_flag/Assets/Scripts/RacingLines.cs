@@ -22,7 +22,9 @@ public class RacingLines : MonoBehaviour
         // ----- TMP ----
         List<Vector3> optimalCheckpoints = new List<Vector3>();
         foreach (Vector3Int tilePos in track.trackTilesPos) {
-            optimalCheckpoints.Add(tileManager.CellToWorld(tilePos));
+            Vector3 center = tileManager.CellToWorld(tilePos);
+            center -= tileManager.GetCheckpoint(tilePos);
+            optimalCheckpoints.Add(center);
         }
         // --------------
 

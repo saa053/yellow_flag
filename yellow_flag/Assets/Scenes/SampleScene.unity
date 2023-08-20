@@ -123,37 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &193167145
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 193167146}
-  m_Layer: 0
-  m_Name: test
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &193167146
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 193167145}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.287, y: -0.139, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &249658841
 GameObject:
   m_ObjectHideFlags: 0
@@ -357,7 +326,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 36.9, y: -19.9, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -457,8 +426,8 @@ Tilemap:
   - first: {x: 0, y: 0, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 31
-      m_TileSpriteIndex: 31
+      m_TileIndex: 30
+      m_TileSpriteIndex: 30
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -18586,9 +18555,9 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 6b2617c51630a2046a82b0a1e64ad51e, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: c2eb66c043a441e41b0ab7d4ff337853, type: 2}
-  - m_RefCount: 5
+  - m_RefCount: 6
     m_Data: {fileID: 11400000, guid: 66708e1af9f2f0b408a781fa61237a7c, type: 2}
-  - m_RefCount: 5
+  - m_RefCount: 4
     m_Data: {fileID: 11400000, guid: 3950e8827e08cab48b2d10d9d18c0c7b, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: ac5d684272ed95d468a51779a192eb59, type: 2}
@@ -18667,9 +18636,9 @@ Tilemap:
     m_Data: {fileID: 21300000, guid: 9a915c1e48d06744fba54070fe2d2bab, type: 3}
   - m_RefCount: 2
     m_Data: {fileID: 21300000, guid: 1c856fa65d33b0049b963595e0bd00eb, type: 3}
-  - m_RefCount: 5
+  - m_RefCount: 6
     m_Data: {fileID: 21300000, guid: 06eb1035188b3f44fad7de5a26ee4942, type: 3}
-  - m_RefCount: 5
+  - m_RefCount: 4
     m_Data: {fileID: 21300000, guid: a2108c9e1baa65d40adb9d7ade7dddad, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 21300000, guid: 6782d5a565ad9c94aa8e654033d8edf3, type: 3}
@@ -18748,6 +18717,7 @@ GameObject:
   - component: {fileID: 1295976263}
   - component: {fileID: 1295976262}
   - component: {fileID: 1295976264}
+  - component: {fileID: 1295976265}
   m_Layer: 0
   m_Name: RacingLines
   m_TagString: Untagged
@@ -18848,6 +18818,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileManager: {fileID: 429885293}
   track: {fileID: 249658842}
+--- !u!114 &1295976265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1295976260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6c7677e8b941b64381490e43710f41d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1460819536
 GameObject:
   m_ObjectHideFlags: 0
@@ -18902,4 +18884,3 @@ SceneRoots:
   - {fileID: 429885294}
   - {fileID: 1295976263}
   - {fileID: 249658843}
-  - {fileID: 193167146}

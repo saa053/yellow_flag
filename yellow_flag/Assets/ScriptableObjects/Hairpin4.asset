@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: Hairpin4
   m_EditorClassIdentifier: 
   tiles:
-  - {fileID: 11400000, guid: 703b51c0e9e89214592503cbd5a3b9c0, type: 2}
-  - {fileID: 11400000, guid: 7bdb2d02f4d2d49438f48811c313ac2d, type: 2}
+  - {fileID: 11400000, guid: c70090f0c5f543147a18f9ee0e7f2a11, type: 2}
+  - {fileID: 11400000, guid: a82a585644f227048b615c3a263f9a4f, type: 2}
   isStart: 0
   isTrack: 1
-  exits: 0100000002000000
+  exits: 0300000004000000
+  rotationAngle: 240
+  checkpoint: {x: 0.2034, y: -0.3651, z: 0}
