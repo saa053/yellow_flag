@@ -16,7 +16,7 @@ public class SplineFollower : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start() {
+    /* void Start() {
         SplineContainer splineContainer = racingLines.GetComponent<SplineContainer>();
         optimal = splineContainer.Splines[0];
 
@@ -38,5 +38,5 @@ public class SplineFollower : MonoBehaviour
         Vector3 direction = nextPosition - currentPosition;
         transform.rotation = Quaternion.LookRotation(direction, transform.up);
 
-    }
+    } */
 }
