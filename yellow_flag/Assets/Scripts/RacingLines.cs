@@ -10,7 +10,7 @@ public class RacingLines : MonoBehaviour
     [SerializeField] TileManager tileManager;
     [SerializeField] TrackBuilder track;
 
-    private void Start() {
+    void Start() {
         SplineContainer splineContainer = GetComponent<SplineContainer>();
 
         if (!track.buildCompleted) {
@@ -40,7 +40,7 @@ public class RacingLines : MonoBehaviour
     }
 
     // Creates a spline racing line based on a list of checkpoints
-    private void CreateRacingLine(Spline spline, List<Vector3> checkpoints) {
+    void CreateRacingLine(Spline spline, List<Vector3> checkpoints) {
         foreach (Vector3 checkpoint in checkpoints) {      
                   
             BezierKnot knot = new BezierKnot(new Vector3(checkpoint.x, 0, checkpoint.y), 0, 0);

@@ -9,11 +9,11 @@ public class TrackBuilder : MonoBehaviour
     public bool buildCompleted = false;
 
     // Gizmos
-    [SerializeField] private bool drawTrackWithGizmos;
+    [SerializeField] bool drawTrackWithGizmos;
     [SerializeField] float circleRadius;
     [SerializeField] float delay;
 
-    private void Start() {
+    void Start() {
         if (drawTrackWithGizmos) {
             StartCoroutine(BuildTrackWithGizmos());
         } else {
@@ -22,7 +22,7 @@ public class TrackBuilder : MonoBehaviour
     }
 
     // Creates a list of all tiles that makes up the track
-    private void BuildTrack() {
+    void BuildTrack() {
         Vector3Int currentPos = tileManager.LocateStartTile();
 
         int entrance;
@@ -87,7 +87,7 @@ public class TrackBuilder : MonoBehaviour
     }
 
     // Visually draws the track building process for debugging
-    private IEnumerator BuildTrackWithGizmos() {
+    IEnumerator BuildTrackWithGizmos() {
         Vector3Int currentPos = tileManager.LocateStartTile();
 
         int entrance;
@@ -150,7 +150,7 @@ public class TrackBuilder : MonoBehaviour
         buildCompleted = true;
     }
 
-    private void OnDrawGizmos() {
+    void OnDrawGizmos() {
         if (!drawTrackWithGizmos)
             return;
 

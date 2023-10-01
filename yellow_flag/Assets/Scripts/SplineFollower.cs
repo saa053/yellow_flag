@@ -5,10 +5,11 @@ using UnityEngine.Splines;
 
 public class SplineFollower : MonoBehaviour
 {
-    [SerializeField] RacingLines racingLines;
+    [SerializeField] SplineContainer splineContainer;
     Spline optimal;
 
     [SerializeField] float speed = 1f;
+    [SerializeField] float turnThreshold;
 
     float distancePercentage = 0f;
 
@@ -16,27 +17,31 @@ public class SplineFollower : MonoBehaviour
 
 
     // Start is called before the first frame update
-    /* void Start() {
-        SplineContainer splineContainer = racingLines.GetComponent<SplineContainer>();
+    void Start() {
         optimal = splineContainer.Splines[0];
 
-        splineLength = optimal.CalculateLength();
+        //splineLength = optimal.CalculateLength();
+        splineLength = splineContainer.CalculateLength(0);
     }
 
     // Update is called once per frame
     void Update() {
         distancePercentage += speed * Time.deltaTime / splineLength;
         
-        Vector3 currentPosition = optimal.EvaluatePosition(distancePercentage);
-        transform.position = currentPosition;
+        Vector3 currentPosition = splineContainer.EvaluatePosition(distancePercentage);
+        transform.position = new Vector3(currentPosition.x, currentPosition.y, 0);
 
         if (distancePercentage > 1f) {
             distancePercentage = 0f;
         }
 
-        Vector3 nextPosition = optimal.EvaluatePosition(distancePercentage + 0.05f);
+        Vector3 nextPosition = splineContainer.EvaluatePosition(distancePercentage + turnThreshold);
         Vector3 direction = nextPosition - currentPosition;
-        transform.rotation = Quaternion.LookRotation(direction, transform.up);
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-    } */
+        // Set the rotation only along the Z-axis
+        transform.rotation = Quaternion.Euler(0, 0, angle);
+
+
+    }
 }

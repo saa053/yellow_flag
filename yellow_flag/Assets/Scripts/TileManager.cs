@@ -8,12 +8,12 @@ using UnityEngine.U2D;
 
 public class TileManager : MonoBehaviour
 {
-    [SerializeField] private Tilemap tilemap;
-    [SerializeField] private List<TileData> tileDatas;
+    [SerializeField] Tilemap tilemap;
+    [SerializeField] List<TileData> tileDatas;
 
-    private Dictionary<TileBase, TileData> dataFromTiles;
+    Dictionary<TileBase, TileData> dataFromTiles;
 
-    private void Awake() {
+    void Awake() {
 
         // Put all tile data in a dictionary for easy lookup
         dataFromTiles = new Dictionary<TileBase, TileData>();
