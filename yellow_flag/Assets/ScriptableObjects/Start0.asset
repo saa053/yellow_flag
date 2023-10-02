@@ -16,4 +16,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 608a9d9f1d2e25a4689c4caa9ae9c821, type: 2}
   isStart: 1
   isTrack: 1
+  isTurn: 0
   exits: 0000000003000000
+  rotationAngle: 0
+  checkpoints:
+  - position: {x: 0, y: 0, z: 0}
+    isApex: 0

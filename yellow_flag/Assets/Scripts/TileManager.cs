@@ -68,6 +68,12 @@ public class TileManager : MonoBehaviour
         return dataFromTiles[tile].isStart;
     }
 
+    // Returns true if the tile is a turn tile
+    public bool isTurnTile(Vector3Int tilePos) {
+        TileBase tile = tilemap.GetTile(tilePos);
+        return dataFromTiles[tile].isTurn;
+    }
+
     // Translate tilemap position to world position
     public Vector3 CellToWorld(Vector3Int tilePos) {
         return tilemap.CellToWorld(tilePos);
@@ -78,12 +84,16 @@ public class TileManager : MonoBehaviour
         return tilemap.WorldToCell(pos);
     }
 
-    public Vector3 GetCheckpoint(Vector3Int tilePos) {
+    // Rotates the position data in the tile to match its own rotation angle,
+    // and return the updated Checkpoint of the tile
+    public Checkpoint GetCheckpoint(Vector3Int tilePos, int racingLine) {
         TileBase tile = tilemap.GetTile(tilePos);
         float rotationAngle = dataFromTiles[tile].rotationAngle;
 
         Quaternion rotationQuaternion = Quaternion.Euler(0f, 0f, -rotationAngle);
-        Vector3 checkpoint = rotationQuaternion * dataFromTiles[tile].checkpoint;
+        Vector3 pos = rotationQuaternion * dataFromTiles[tile].checkpoints[racingLine].position;
+
+        Checkpoint checkpoint = new Checkpoint(pos, dataFromTiles[tile].checkpoints[racingLine].isApex);
         return checkpoint;
     }
 }

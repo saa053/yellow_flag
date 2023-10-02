@@ -5,6 +5,17 @@ using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+[System.Serializable]
+public class Checkpoint {
+    public Vector3 position;
+    public bool isApex;
+
+    public Checkpoint(Vector3 pos, bool val) {
+        position = pos;
+        isApex = val;
+    }
+}
+
 [CreateAssetMenu]
 public class TileData : ScriptableObject {
     public TileBase[] tiles;
@@ -12,6 +23,8 @@ public class TileData : ScriptableObject {
     public bool isStart;
 
     public bool isTrack;
+
+    public bool isTurn;
 
     public int[] exits; // An exit is a hexagon side, where the road on a track tile will exit. Exit 0 is on top and then it moves clockwise.
 
@@ -22,5 +35,5 @@ public class TileData : ScriptableObject {
     */
     public float rotationAngle;
 
-    public Vector3 checkpoint; // Racing line knot position
+    public Checkpoint[] checkpoints; // Racing line knot position (local Vector3 pos) and an apex boolean
 }

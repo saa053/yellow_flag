@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ceac9a6cf2f2234d8475766f90b4454, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  splineContainer: {fileID: 1295976265}
+  racingLines: {fileID: 1295976264}
   speed: 1.5
   startingPoint: 0.6
   turnThreshold: 0.001
@@ -255,7 +255,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ceac9a6cf2f2234d8475766f90b4454, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  splineContainer: {fileID: 1295976265}
+  racingLines: {fileID: 1295976264}
   speed: 1.5
   startingPoint: 0.8
   turnThreshold: 0.001
@@ -407,7 +407,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ceac9a6cf2f2234d8475766f90b4454, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  splineContainer: {fileID: 1295976265}
+  racingLines: {fileID: 1295976264}
   speed: 1.5
   startingPoint: 0.4
   turnThreshold: 0.001
@@ -523,8 +523,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1dc8354001403864aadbc087f0752e9a, type: 2}
   - {fileID: 11400000, guid: 5113b8dcdbc0dc345ad8da617cb64ee6, type: 2}
   - {fileID: 11400000, guid: 8e433db16de26c4469876c43a3364f5d, type: 2}
-  - {fileID: 11400000, guid: 8706169217958f24983b7b94d604866f, type: 2}
   - {fileID: 11400000, guid: 353598d10fd2a934687d799d3b2f72a9, type: 2}
+  - {fileID: 11400000, guid: 8706169217958f24983b7b94d604866f, type: 2}
   - {fileID: 11400000, guid: 626194c37b6a2674a976896c5c1d1a0d, type: 2}
   - {fileID: 11400000, guid: d819ab2425b17644c896a48eb158a9e4, type: 2}
   - {fileID: 11400000, guid: c9b59e4bf69e3b54ba6cc314e4745a2b, type: 2}
@@ -668,7 +668,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ceac9a6cf2f2234d8475766f90b4454, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  splineContainer: {fileID: 1295976265}
+  racingLines: {fileID: 1295976264}
   speed: 1.5
   startingPoint: 0.62
   turnThreshold: 0.001
@@ -770,7 +770,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ceac9a6cf2f2234d8475766f90b4454, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  splineContainer: {fileID: 1295976265}
+  racingLines: {fileID: 1295976264}
   speed: 1.5
   startingPoint: 0.15
   turnThreshold: 0.001
@@ -19283,7 +19283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ceac9a6cf2f2234d8475766f90b4454, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  splineContainer: {fileID: 1295976265}
+  racingLines: {fileID: 1295976264}
   speed: 1.5
   startingPoint: 0.3
   turnThreshold: 0.001
@@ -19385,7 +19385,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ceac9a6cf2f2234d8475766f90b4454, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  splineContainer: {fileID: 1295976265}
+  racingLines: {fileID: 1295976264}
   speed: 1.5
   startingPoint: 0.19
   turnThreshold: 0.001
@@ -19487,7 +19487,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ceac9a6cf2f2234d8475766f90b4454, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  splineContainer: {fileID: 1295976265}
+  racingLines: {fileID: 1295976264}
   speed: 1.5
   startingPoint: 0.7
   turnThreshold: 0.001
@@ -19589,7 +19589,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ceac9a6cf2f2234d8475766f90b4454, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  splineContainer: {fileID: 1295976265}
+  racingLines: {fileID: 1295976264}
   speed: 1.5
   startingPoint: 0.45
   turnThreshold: 0.001
@@ -19691,7 +19691,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ceac9a6cf2f2234d8475766f90b4454, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  splineContainer: {fileID: 1295976265}
+  racingLines: {fileID: 1295976264}
   speed: 1.5
   startingPoint: 0.55
   turnThreshold: 0.001
@@ -19810,6 +19810,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileManager: {fileID: 429885293}
   track: {fileID: 249658842}
+  apexKnots: 
 --- !u!114 &1295976265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19904,7 +19905,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ceac9a6cf2f2234d8475766f90b4454, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  splineContainer: {fileID: 1295976265}
+  racingLines: {fileID: 1295976264}
   speed: 1.5
   startingPoint: 0.35
   turnThreshold: 0.001
@@ -20051,7 +20052,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ceac9a6cf2f2234d8475766f90b4454, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  splineContainer: {fileID: 1295976265}
+  racingLines: {fileID: 1295976264}
   speed: 1.5
   startingPoint: 0.9
   turnThreshold: 0.001
@@ -20153,7 +20154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ceac9a6cf2f2234d8475766f90b4454, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  splineContainer: {fileID: 1295976265}
+  racingLines: {fileID: 1295976264}
   speed: 1.5
   startingPoint: 0.5
   turnThreshold: 0.001
@@ -20255,7 +20256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ceac9a6cf2f2234d8475766f90b4454, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  splineContainer: {fileID: 1295976265}
+  racingLines: {fileID: 1295976264}
   speed: 1.5
   startingPoint: 0.85
   turnThreshold: 0.001
@@ -20357,7 +20358,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ceac9a6cf2f2234d8475766f90b4454, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  splineContainer: {fileID: 1295976265}
+  racingLines: {fileID: 1295976264}
   speed: 1.5
   startingPoint: 0.78
   turnThreshold: 0.001
@@ -20459,7 +20460,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ceac9a6cf2f2234d8475766f90b4454, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  splineContainer: {fileID: 1295976265}
+  racingLines: {fileID: 1295976264}
   speed: 1.5
   startingPoint: 0
   turnThreshold: 0.001
