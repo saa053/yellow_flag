@@ -68,6 +68,17 @@ public class TileManager : MonoBehaviour
         return dataFromTiles[tile].isStart;
     }
 
+    // Returns the type of the tile at tilePos
+    public Type GetType(Vector3Int tilePos) {
+        TileBase tile = tilemap.GetTile(tilePos);
+        return dataFromTiles[tile].type;
+    }
+
+    public float GetRotation(Vector3Int tilePos) {
+        TileBase tile = tilemap.GetTile(tilePos);
+        return dataFromTiles[tile].rotationAngle;
+    }
+
     // Returns true if the tile is a turn tile
     public bool isTurnTile(Vector3Int tilePos) {
         TileBase tile = tilemap.GetTile(tilePos);
@@ -82,6 +93,11 @@ public class TileManager : MonoBehaviour
     // Translate world position to tilemap position
     public Vector3 WorldToCell(Vector3 pos) {
         return tilemap.WorldToCell(pos);
+    }
+
+    public Checkpoint GetCheckpoint2(Vector3Int tilePos) {
+        TileBase tile = tilemap.GetTile(tilePos);
+        return dataFromTiles[tile].checkpoints[0];
     }
 
     // Rotates the position data in the tile to match its own rotation angle,

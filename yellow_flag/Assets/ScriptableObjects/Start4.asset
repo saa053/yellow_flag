@@ -18,7 +18,8 @@ MonoBehaviour:
   isTrack: 1
   isTurn: 0
   exits: 0400000001000000
-  rotationAngle: 0
+  rotationAngle: 240
+  type: 4
   checkpoints:
   - position: {x: 0, y: 0, z: 0}
     isApex: 0

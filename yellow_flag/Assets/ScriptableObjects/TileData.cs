@@ -16,6 +16,14 @@ public class Checkpoint {
     }
 }
 
+public enum Type {
+    other,
+    straight,
+    turn,
+    hairpin,
+    start,
+}
+
 [CreateAssetMenu]
 public class TileData : ScriptableObject {
     public TileBase[] tiles;
@@ -34,6 +42,8 @@ public class TileData : ScriptableObject {
         Hairpin Tiles: 0 is the bottom right tile. 60 is the next clockwise and so on.
     */
     public float rotationAngle;
+
+    public Type type;
 
     public Checkpoint[] checkpoints; // Racing line knot position (local Vector3 pos) and an apex boolean
 }

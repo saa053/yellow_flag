@@ -6,7 +6,7 @@ using UnityEngine.Splines;
 
 public class SplineFollower : MonoBehaviour
 {
-    [SerializeField] RacingLines racingLines;
+    [SerializeField] TrackBuilder trackBuilder;
     [SerializeField] float speed;
     [SerializeField] float startingPoint;
     [SerializeField] float turnThreshold;
@@ -17,12 +17,12 @@ public class SplineFollower : MonoBehaviour
     float distancePercentage = 0f;
     float splineLength;
 
-    RacingLines.RacingLine optimal = RacingLines.RacingLine.optimal;
-    //RacingLines.RacingLine outside = RacingLines.RacingLine.outside;
-    //RacingLines.RacingLine inside = RacingLines.RacingLine.inside;
+    TrackBuilder.RacingLine optimal = TrackBuilder.RacingLine.optimal;
+    //TrackBuilder.RacingLine left = TrackBuilder.RacingLine.left;
+    //TrackBuilder.RacingLine right = TrackBuilder.RacingLine.right;
 
     void Start() {
-        splineContainer = racingLines.GetComponent<SplineContainer>();
+        splineContainer = trackBuilder.GetComponent<SplineContainer>();
 
         distancePercentage = startingPoint;
 
@@ -56,7 +56,7 @@ public class SplineFollower : MonoBehaviour
     }
 
     void BreakAndAccelerate() {
-        //float distance = splineContainer.Splines[0].ConvertIndexUnit(racingLines.apexKnots[0], PathIndexUnit.Knot, PathIndexUnit.Distance);
+        //float distance = splineContainer.Splines[0].ConvertIndexUnit(trackBuilder.apexKnots[0], PathIndexUnit.Knot, PathIndexUnit.Distance);
         //float knotT = distance / splineLength;
     }
 }
