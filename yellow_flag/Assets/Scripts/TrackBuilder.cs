@@ -1,9 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Splines;
-using UnityEngine.Tilemaps;
 
 public class TrackBuilder : MonoBehaviour
 {
@@ -35,7 +32,7 @@ public class TrackBuilder : MonoBehaviour
 
     // Locates the start tile, loops through track and adds knots to racing line splines
     void CreateRacingLines() {
-        Vector3Int currentPos = tileManager.LocateStartTile();
+        Vector2Int currentPos = tileManager.LocateStartTile();
         Type type;
 
         int entrance = tileManager.GetExits(currentPos)[0];
@@ -66,7 +63,7 @@ public class TrackBuilder : MonoBehaviour
     }
     
 
-    Vector3Int GetNextTrackTile(Vector3Int currentPos, int exit) {
+    Vector2Int GetNextTrackTile(Vector2Int currentPos, int exit) {
         switch (exit) {
                 case 0:
                     currentPos.x += 1;
@@ -106,14 +103,14 @@ public class TrackBuilder : MonoBehaviour
     }
 
 
-    void AddKnots(Vector3Int tilePos, int entrance, int knotIndex)
+    void AddKnots(Vector2Int tilePos, int entrance, int knotIndex)
     {
-        Vector3[] knotPositions = GetKnotPos(tilePos);
+        Vector2[] knotPositions = GetKnotPos(tilePos);
 
         // Creat knots for each checkpoint
-        BezierKnot optimalKnot = new BezierKnot(new Vector3(knotPositions[(int)RacingLine.optimal].x, 0, knotPositions[(int)RacingLine.optimal].y), 0, 0);
-        BezierKnot leftKnot = new BezierKnot(new Vector3(knotPositions[(int)RacingLine.left].x, 0, knotPositions[(int)RacingLine.left].y), 0, 0);
-        BezierKnot rightKnot = new BezierKnot(new Vector3(knotPositions[(int)RacingLine.right].x, 0, knotPositions[(int)RacingLine.right].y), 0, 0);
+        BezierKnot optimalKnot = new BezierKnot(new Vector3(knotPositions[(int)RacingLine.optimal].x, 0, knotPositions[(int)RacingLine.optimal].y));
+        BezierKnot leftKnot = new BezierKnot(new Vector3(knotPositions[(int)RacingLine.left].x, 0, knotPositions[(int)RacingLine.left].y));
+        BezierKnot rightKnot = new BezierKnot(new Vector3(knotPositions[(int)RacingLine.right].x, 0, knotPositions[(int)RacingLine.right].y));
 
         // Add optimal knot to spline
         splineContainer.Splines[(int)RacingLine.optimal].Add(optimalKnot);
@@ -140,20 +137,20 @@ public class TrackBuilder : MonoBehaviour
 
 
     // Calculates the knot position for all racing lines and returns them in an array
-    Vector3[] GetKnotPos(Vector3Int tilePos) {
-        Vector3 optimal; 
-        Vector3 left;
-        Vector3 right;
+    Vector2[] GetKnotPos(Vector2Int tilePos) {
+        Vector2 optimal; 
+        Vector2 left;
+        Vector2 right;
 
         // Get checkpoint of tile
         optimal = tileManager.GetCheckpoint(tilePos);
 
         // Calculate and set left and right checkpoint
-        Vector3 vectorToCenterOfTile = optimal - Vector3.zero;
+        Vector2 vectorToCenterOfTile = optimal - Vector2.zero;
         vectorToCenterOfTile = vectorToCenterOfTile.normalized;
-        if (vectorToCenterOfTile == Vector3.zero) {
-            left = new Vector3(optimal.x + spaceBetweenRacingLines, optimal.y, optimal.z);
-            right = new Vector3(optimal.x - spaceBetweenRacingLines, optimal.y, optimal.z);
+        if (vectorToCenterOfTile == Vector2.zero) {
+            left = new Vector2(optimal.x + spaceBetweenRacingLines, optimal.y);
+            right = new Vector2(optimal.x - spaceBetweenRacingLines, optimal.y);
         } else {
             left = optimal + spaceBetweenRacingLines * vectorToCenterOfTile;
             right = optimal - spaceBetweenRacingLines * vectorToCenterOfTile;
@@ -167,12 +164,12 @@ public class TrackBuilder : MonoBehaviour
         right = newRotation * right;
         
         // Convert checkpoints local pos to world pos
-        Vector3 center = tileManager.CellToWorld(tilePos);
+        Vector2 center = tileManager.CellToWorld(tilePos);
         optimal = center - optimal;
         left = center - left;
         right = center - right;
 
-        Vector3[] knotPositions = new Vector3[] {
+        Vector2[] knotPositions = new Vector2[] {
             optimal,
             left,
             right
@@ -187,12 +184,12 @@ public class TrackBuilder : MonoBehaviour
     // If referencePoint is positive, left knot should be placed in left spline
     // else left knot should be placed in right spline
     // Right knot should be placed opposite of left knot
-    float CalculateLeftRight(Vector3Int tilePos, int entrance, Vector3 optimal, Vector3 left) {
+    float CalculateLeftRight(Vector2Int tilePos, int entrance, Vector2 optimal, Vector2 left) {
         // Find middle of entrance side to use as reference
-        Vector3 center = tileManager.CellToWorld(tilePos);
+        Vector2 center = tileManager.CellToWorld(tilePos);
         float angle = -60f * entrance;
-        Vector3 entranceDirection = Quaternion.Euler(0, 0, angle) * Vector3.up;
-        Vector3 sideMidpoint = center + entranceDirection;
+        Vector2 entranceDirection = Quaternion.Euler(0, 0, angle) * Vector2.up;
+        Vector2 sideMidpoint = center + entranceDirection;
 
         // Calculate cross product
         Vector2 referenceToOptimal = optimal - sideMidpoint;

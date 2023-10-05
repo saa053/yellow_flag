@@ -1,10 +1,6 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using UnityEngine.U2D;
 
 public class TileManager : MonoBehaviour
 {
@@ -26,13 +22,13 @@ public class TileManager : MonoBehaviour
     }
 
     // Returns the tilemap position of the first start tile it finds
-    public Vector3Int LocateStartTile() {
+    public Vector2Int LocateStartTile() {
         BoundsInt bounds = tilemap.cellBounds;
         TileBase[] allTiles = tilemap.GetTilesBlock(bounds);
 
         for (int x = bounds.x; x < bounds.xMax; x++) {
             for (int y = bounds.y; y < bounds.yMax; y++) {
-                Vector3Int cellPosition = new Vector3Int(x, y, 0);
+                Vector2Int cellPosition = new Vector2Int(x, y);
                 TileBase tile = allTiles[x - bounds.x + (y - bounds.y) * bounds.size.x];
                 
                 if (tile == null || !dataFromTiles.ContainsKey(tile))
@@ -45,39 +41,39 @@ public class TileManager : MonoBehaviour
 
         Debug.Log("ERROR: Missing start tile!");
 
-        return new Vector3Int(-1, -1, -1);
+        return new Vector2Int(-1, -1);
     }
 
     // Returns a tiles exits
-    public int[] GetExits(Vector3Int tilePos) {
-        TileBase tile = tilemap.GetTile(tilePos);
+    public int[] GetExits(Vector2Int tilePos) {
+        TileBase tile = tilemap.GetTile(new Vector3Int(tilePos.x, tilePos.y, 0));
         return dataFromTiles[tile].exits;
     }
 
     // Returns the type of the tile at tilePos
-    public Type GetType(Vector3Int tilePos) {
-        TileBase tile = tilemap.GetTile(tilePos);
+    public Type GetType(Vector2Int tilePos) {
+        TileBase tile = tilemap.GetTile(new Vector3Int(tilePos.x, tilePos.y, 0));
         return dataFromTiles[tile].type;
     }
 
     // Returns the rotation of the tile
-    public float GetRotation(Vector3Int tilePos) {
-        TileBase tile = tilemap.GetTile(tilePos);
+    public float GetRotation(Vector2Int tilePos) {
+        TileBase tile = tilemap.GetTile(new Vector3Int(tilePos.x, tilePos.y, 0));
         return dataFromTiles[tile].rotationAngle;
     }
 
     // Translate tilemap position to world position
-    public Vector3 CellToWorld(Vector3Int tilePos) {
-        return tilemap.CellToWorld(tilePos);
+    public Vector2 CellToWorld(Vector2Int tilePos) {
+        return tilemap.CellToWorld(new Vector3Int(tilePos.x, tilePos.y, 0));
     }
 
     // Translate world position to tilemap position
-    public Vector3 WorldToCell(Vector3 tilePos) {
-        return tilemap.WorldToCell(tilePos);
+    public Vector3Int WorldToCell(Vector2 tilePos) {
+        return tilemap.WorldToCell(new Vector3Int((int)tilePos.x, (int)tilePos.y, 0));
     }
 
-    public Vector3 GetCheckpoint(Vector3Int tilePos) {
-        TileBase tile = tilemap.GetTile(tilePos);
+    public Vector2 GetCheckpoint(Vector2Int tilePos) {
+        TileBase tile = tilemap.GetTile(new Vector3Int(tilePos.x, tilePos.y, 0));
         return dataFromTiles[tile].checkpoint;
     }
 }

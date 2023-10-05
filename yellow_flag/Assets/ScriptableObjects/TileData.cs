@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -28,5 +24,5 @@ public class TileData : ScriptableObject {
 
     public Type type;
 
-    public Vector3 checkpoint; // Racing line knot position (local Vector3 pos)
+    public Vector2 checkpoint; // Racing line knot position (local Vector3 pos)
 }
