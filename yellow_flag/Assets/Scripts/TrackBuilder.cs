@@ -146,8 +146,7 @@ public class TrackBuilder : MonoBehaviour
         Vector3 right;
 
         // Get checkpoint of tile
-        Checkpoint checkpoint = tileManager.GetCheckpoint2(tilePos);
-        optimal = checkpoint.position;
+        optimal = tileManager.GetCheckpoint(tilePos);
 
         // Calculate and set left and right checkpoint
         Vector3 vectorToCenterOfTile = optimal - Vector3.zero;

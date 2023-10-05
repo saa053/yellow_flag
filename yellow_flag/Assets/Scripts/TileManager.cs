@@ -38,9 +38,7 @@ public class TileManager : MonoBehaviour
                 if (tile == null || !dataFromTiles.ContainsKey(tile))
                     continue;
 
-                bool isStart = dataFromTiles[tile].isStart;
-
-                if (isStart)
+                if (dataFromTiles[tile].type == Type.start)
                     return cellPosition;
             }
         }
@@ -56,33 +54,16 @@ public class TileManager : MonoBehaviour
         return dataFromTiles[tile].exits;
     }
 
-    // Returns true if the tile is a track tile
-    public bool isTrack(Vector3Int tilePos) {
-        TileBase tile = tilemap.GetTile(tilePos);
-        return dataFromTiles[tile].isTrack;
-    }
-
-    // Returns true if the tile is a start tile
-    public bool isStartTile(Vector3Int tilePos) {
-        TileBase tile = tilemap.GetTile(tilePos);
-        return dataFromTiles[tile].isStart;
-    }
-
     // Returns the type of the tile at tilePos
     public Type GetType(Vector3Int tilePos) {
         TileBase tile = tilemap.GetTile(tilePos);
         return dataFromTiles[tile].type;
     }
 
+    // Returns the rotation of the tile
     public float GetRotation(Vector3Int tilePos) {
         TileBase tile = tilemap.GetTile(tilePos);
         return dataFromTiles[tile].rotationAngle;
-    }
-
-    // Returns true if the tile is a turn tile
-    public bool isTurnTile(Vector3Int tilePos) {
-        TileBase tile = tilemap.GetTile(tilePos);
-        return dataFromTiles[tile].isTurn;
     }
 
     // Translate tilemap position to world position
@@ -91,26 +72,13 @@ public class TileManager : MonoBehaviour
     }
 
     // Translate world position to tilemap position
-    public Vector3 WorldToCell(Vector3 pos) {
-        return tilemap.WorldToCell(pos);
+    public Vector3 WorldToCell(Vector3 tilePos) {
+        return tilemap.WorldToCell(tilePos);
     }
 
-    public Checkpoint GetCheckpoint2(Vector3Int tilePos) {
+    public Vector3 GetCheckpoint(Vector3Int tilePos) {
         TileBase tile = tilemap.GetTile(tilePos);
-        return dataFromTiles[tile].checkpoints[0];
-    }
-
-    // Rotates the position data in the tile to match its own rotation angle,
-    // and return the updated Checkpoint of the tile
-    public Checkpoint GetCheckpoint(Vector3Int tilePos, int racingLine) {
-        TileBase tile = tilemap.GetTile(tilePos);
-        float rotationAngle = dataFromTiles[tile].rotationAngle;
-
-        Quaternion rotationQuaternion = Quaternion.Euler(0f, 0f, -rotationAngle);
-        Vector3 pos = rotationQuaternion * dataFromTiles[tile].checkpoints[racingLine].position;
-
-        Checkpoint checkpoint = new Checkpoint(pos, dataFromTiles[tile].checkpoints[racingLine].isApex);
-        return checkpoint;
+        return dataFromTiles[tile].checkpoint;
     }
 }
 
