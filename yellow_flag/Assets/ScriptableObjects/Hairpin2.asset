@@ -15,12 +15,7 @@ MonoBehaviour:
   tiles:
   - {fileID: 11400000, guid: 703b51c0e9e89214592503cbd5a3b9c0, type: 2}
   - {fileID: 11400000, guid: 7bdb2d02f4d2d49438f48811c313ac2d, type: 2}
-  isStart: 0
-  isTrack: 1
-  isTurn: 0
   exits: 0100000002000000
-  rotationAngle: 120
+  rotationAngle: 180
   type: 3
-  checkpoints:
-  - position: {x: 0.2034, y: -0.3651, z: 0}
-    isApex: 1
+  checkpoint: {x: 0.364, y: 0, z: 0}

@@ -11,38 +11,34 @@ public class SplineFollower : MonoBehaviour
     [SerializeField] float startingPoint;
     [SerializeField] float turnThreshold;
     [SerializeField] float imageRotation;
+    [SerializeField] TrackBuilder.RacingLine racingLine;
 
     SplineContainer splineContainer;
 
     float distancePercentage = 0f;
     float splineLength;
 
-    TrackBuilder.RacingLine optimal = TrackBuilder.RacingLine.optimal;
-    //TrackBuilder.RacingLine left = TrackBuilder.RacingLine.left;
-    //TrackBuilder.RacingLine right = TrackBuilder.RacingLine.right;
-
     void Start() {
         splineContainer = trackBuilder.GetComponent<SplineContainer>();
 
         distancePercentage = startingPoint;
-
-        splineLength = splineContainer.CalculateLength((int)optimal);
     }
 
     void Update() {
-        if (splineLength == 0) {
-            splineLength = splineContainer.CalculateLength((int)optimal);
+        if (!trackBuilder.buildCompleted)
             return;
-        }
 
-        Move();
+        Move((int)racingLine);
     }
 
-    void Move() {
+    void Move(int racingLine) {
+        if (splineLength == 0)
+            splineLength = splineContainer.CalculateLength(racingLine);
+
         distancePercentage += speed * Time.deltaTime / splineLength;
         
         Vector3 currentPosition = splineContainer.EvaluatePosition(distancePercentage);
-        transform.position = new Vector3(currentPosition.x, currentPosition.y, (int)optimal);
+        transform.position = new Vector3(currentPosition.x, currentPosition.y, racingLine);
 
         if (distancePercentage > 1f) {
             distancePercentage = 0f;
