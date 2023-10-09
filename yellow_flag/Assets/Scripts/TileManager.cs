@@ -72,6 +72,7 @@ public class TileManager : MonoBehaviour
         return tilemap.WorldToCell(new Vector3Int((int)tilePos.x, (int)tilePos.y, 0));
     }
 
+    // Returns the checkpoint of the tile
     public Vector2 GetCheckpoint(Vector2Int tilePos) {
         TileBase tile = tilemap.GetTile(new Vector3Int(tilePos.x, tilePos.y, 0));
         return dataFromTiles[tile].checkpoint;

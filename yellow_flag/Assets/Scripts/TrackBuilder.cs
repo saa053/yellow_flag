@@ -12,7 +12,7 @@ public class TrackBuilder : MonoBehaviour
     public enum RacingLine {
         optimal,
         left,
-        right,
+        right
     }
     public bool buildCompleted = false;
 
@@ -108,9 +108,21 @@ public class TrackBuilder : MonoBehaviour
         Vector2[] knotPositions = GetKnotPos(tilePos);
 
         // Creat knots for each checkpoint
-        BezierKnot optimalKnot = new BezierKnot(new Vector3(knotPositions[(int)RacingLine.optimal].x, 0, knotPositions[(int)RacingLine.optimal].y));
-        BezierKnot leftKnot = new BezierKnot(new Vector3(knotPositions[(int)RacingLine.left].x, 0, knotPositions[(int)RacingLine.left].y));
-        BezierKnot rightKnot = new BezierKnot(new Vector3(knotPositions[(int)RacingLine.right].x, 0, knotPositions[(int)RacingLine.right].y));
+        BezierKnot optimalKnot = new BezierKnot(
+            new Vector3(knotPositions[(int)RacingLine.optimal].x, knotPositions[(int)RacingLine.optimal].y), 
+            0, 
+            0, 
+            Quaternion.Euler(-90, 0, 0));
+        BezierKnot leftKnot = new BezierKnot(
+            new Vector3(knotPositions[(int)RacingLine.left].x, knotPositions[(int)RacingLine.left].y), 
+            0, 
+            0, 
+            Quaternion.Euler(-90, 0, 0));
+        BezierKnot rightKnot = new BezierKnot(
+            new Vector3(knotPositions[(int)RacingLine.right].x, knotPositions[(int)RacingLine.right].y), 
+            0, 
+            0, 
+            Quaternion.Euler(-90, 0, 0));
 
         // Add optimal knot to spline
         splineContainer.Splines[(int)RacingLine.optimal].Add(optimalKnot);

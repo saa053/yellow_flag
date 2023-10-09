@@ -149,13 +149,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 249658841}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &249658844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,6 +182,30 @@ MonoBehaviour:
     m_ObjectData:
       m_Data: []
   m_Splines:
+  - m_EditModeType: 1
+    m_Knots: []
+    m_MetaData: []
+    m_Closed: 0
+    m_IntData:
+      m_Data: []
+    m_FloatData:
+      m_Data: []
+    m_Float4Data:
+      m_Data: []
+    m_ObjectData:
+      m_Data: []
+  - m_EditModeType: 1
+    m_Knots: []
+    m_MetaData: []
+    m_Closed: 0
+    m_IntData:
+      m_Data: []
+    m_FloatData:
+      m_Data: []
+    m_Float4Data:
+      m_Data: []
+    m_ObjectData:
+      m_Data: []
   - m_EditModeType: 1
     m_Knots: []
     m_MetaData: []
@@ -420,7 +444,7 @@ Transform:
   m_GameObject: {fileID: 637517538}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 36.863495, y: -19.358099, z: 0.18021615}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -19197,15 +19221,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 445969084888204901, guid: 124a35d5175018b418fa18767eb58388, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 445969084888204901, guid: 124a35d5175018b418fa18767eb58388, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 445969084888204901, guid: 124a35d5175018b418fa18767eb58388, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 445969084888204901, guid: 124a35d5175018b418fa18767eb58388, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -19224,12 +19248,44 @@ PrefabInstance:
       value: McLaren
       objectReference: {fileID: 0}
     - target: {fileID: 7335944022125662858, guid: 124a35d5175018b418fa18767eb58388, type: 3}
+      propertyPath: speed
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7335944022125662858, guid: 124a35d5175018b418fa18767eb58388, type: 3}
+      propertyPath: maxAngle
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 7335944022125662858, guid: 124a35d5175018b418fa18767eb58388, type: 3}
+      propertyPath: maxLength
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7335944022125662858, guid: 124a35d5175018b418fa18767eb58388, type: 3}
+      propertyPath: nextIndex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7335944022125662858, guid: 124a35d5175018b418fa18767eb58388, type: 3}
+      propertyPath: currentIndex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7335944022125662858, guid: 124a35d5175018b418fa18767eb58388, type: 3}
+      propertyPath: switchOffset
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 7335944022125662858, guid: 124a35d5175018b418fa18767eb58388, type: 3}
       propertyPath: trackBuilder
       value: 
       objectReference: {fileID: 249658845}
     - target: {fileID: 7335944022125662858, guid: 124a35d5175018b418fa18767eb58388, type: 3}
       propertyPath: startingPoint
-      value: 0.2
+      value: 0.1524197
+      objectReference: {fileID: 0}
+    - target: {fileID: 7335944022125662858, guid: 124a35d5175018b418fa18767eb58388, type: 3}
+      propertyPath: turnThreshold
+      value: 0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 7335944022125662858, guid: 124a35d5175018b418fa18767eb58388, type: 3}
+      propertyPath: switchLineDistance
+      value: 0.005
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

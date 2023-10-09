@@ -29,7 +29,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.35, y: 0.35, z: 0.35}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -99,7 +99,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trackBuilder: {fileID: 0}
   speed: 1
-  startingPoint: 1
+  startingPoint: 0.2
   turnThreshold: 0.001
   imageRotation: -90
-  racingLine: 0
+  currentLine: 0
+  nextLine: 0
+  switchLine: 0
+  distancePercentage: 0

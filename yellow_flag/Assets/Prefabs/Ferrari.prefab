@@ -99,7 +99,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trackBuilder: {fileID: 0}
   speed: 1
-  startingPoint: 3.33
+  startingPoint: 0
   turnThreshold: 0.001
   imageRotation: -90
-  racingLine: 0
+  currentLine: 0
+  nextLine: 0
+  switchLine: 0
+  distancePercentage: 0
