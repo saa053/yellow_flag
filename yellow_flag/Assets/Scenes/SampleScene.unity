@@ -272,11 +272,6 @@ MonoBehaviour:
   spaceBetweenRacingLines: 0.1
   apexKnots: 
   buildCompleted: 0
---- !u!4 &261502794 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 445969084888204901, guid: 124a35d5175018b418fa18767eb58388, type: 3}
-  m_PrefabInstance: {fileID: 1061105420}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &429885292
 GameObject:
   m_ObjectHideFlags: 0
@@ -436,11 +431,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &523705249 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 445969084888204901, guid: 124a35d5175018b418fa18767eb58388, type: 3}
-  m_PrefabInstance: {fileID: 2118166239}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &637517538
 GameObject:
   m_ObjectHideFlags: 0
@@ -471,8 +461,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2035047189}
-  - {fileID: 261502794}
-  - {fileID: 523705249}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &725461553
@@ -19169,103 +19157,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!1001 &1061105420
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 637517539}
-    m_Modifications:
-    - target: {fileID: 445969084888204901, guid: 124a35d5175018b418fa18767eb58388, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 445969084888204901, guid: 124a35d5175018b418fa18767eb58388, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 445969084888204901, guid: 124a35d5175018b418fa18767eb58388, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 445969084888204901, guid: 124a35d5175018b418fa18767eb58388, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 445969084888204901, guid: 124a35d5175018b418fa18767eb58388, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 445969084888204901, guid: 124a35d5175018b418fa18767eb58388, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 445969084888204901, guid: 124a35d5175018b418fa18767eb58388, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 445969084888204901, guid: 124a35d5175018b418fa18767eb58388, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 445969084888204901, guid: 124a35d5175018b418fa18767eb58388, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 445969084888204901, guid: 124a35d5175018b418fa18767eb58388, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7124063968732611136, guid: 124a35d5175018b418fa18767eb58388, type: 3}
-      propertyPath: m_Name
-      value: McLaren (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 7335944022125662858, guid: 124a35d5175018b418fa18767eb58388, type: 3}
-      propertyPath: speed
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7335944022125662858, guid: 124a35d5175018b418fa18767eb58388, type: 3}
-      propertyPath: maxAngle
-      value: 45
-      objectReference: {fileID: 0}
-    - target: {fileID: 7335944022125662858, guid: 124a35d5175018b418fa18767eb58388, type: 3}
-      propertyPath: maxLength
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7335944022125662858, guid: 124a35d5175018b418fa18767eb58388, type: 3}
-      propertyPath: nextIndex
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7335944022125662858, guid: 124a35d5175018b418fa18767eb58388, type: 3}
-      propertyPath: currentIndex
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7335944022125662858, guid: 124a35d5175018b418fa18767eb58388, type: 3}
-      propertyPath: switchOffset
-      value: 0.005
-      objectReference: {fileID: 0}
-    - target: {fileID: 7335944022125662858, guid: 124a35d5175018b418fa18767eb58388, type: 3}
-      propertyPath: trackBuilder
-      value: 
-      objectReference: {fileID: 249658845}
-    - target: {fileID: 7335944022125662858, guid: 124a35d5175018b418fa18767eb58388, type: 3}
-      propertyPath: startingPoint
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7335944022125662858, guid: 124a35d5175018b418fa18767eb58388, type: 3}
-      propertyPath: turnThreshold
-      value: 0.001
-      objectReference: {fileID: 0}
-    - target: {fileID: 7335944022125662858, guid: 124a35d5175018b418fa18767eb58388, type: 3}
-      propertyPath: switchLineDistance
-      value: 0.005
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 124a35d5175018b418fa18767eb58388, type: 3}
 --- !u!1 &1460819536
 GameObject:
   m_ObjectHideFlags: 0
@@ -19316,103 +19207,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 445969084888204901, guid: 124a35d5175018b418fa18767eb58388, type: 3}
   m_PrefabInstance: {fileID: 6918778088052695588}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &2118166239
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 637517539}
-    m_Modifications:
-    - target: {fileID: 445969084888204901, guid: 124a35d5175018b418fa18767eb58388, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 445969084888204901, guid: 124a35d5175018b418fa18767eb58388, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 445969084888204901, guid: 124a35d5175018b418fa18767eb58388, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 445969084888204901, guid: 124a35d5175018b418fa18767eb58388, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 445969084888204901, guid: 124a35d5175018b418fa18767eb58388, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 445969084888204901, guid: 124a35d5175018b418fa18767eb58388, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 445969084888204901, guid: 124a35d5175018b418fa18767eb58388, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 445969084888204901, guid: 124a35d5175018b418fa18767eb58388, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 445969084888204901, guid: 124a35d5175018b418fa18767eb58388, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 445969084888204901, guid: 124a35d5175018b418fa18767eb58388, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7124063968732611136, guid: 124a35d5175018b418fa18767eb58388, type: 3}
-      propertyPath: m_Name
-      value: McLaren (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 7335944022125662858, guid: 124a35d5175018b418fa18767eb58388, type: 3}
-      propertyPath: speed
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7335944022125662858, guid: 124a35d5175018b418fa18767eb58388, type: 3}
-      propertyPath: maxAngle
-      value: 45
-      objectReference: {fileID: 0}
-    - target: {fileID: 7335944022125662858, guid: 124a35d5175018b418fa18767eb58388, type: 3}
-      propertyPath: maxLength
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7335944022125662858, guid: 124a35d5175018b418fa18767eb58388, type: 3}
-      propertyPath: nextIndex
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7335944022125662858, guid: 124a35d5175018b418fa18767eb58388, type: 3}
-      propertyPath: currentIndex
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7335944022125662858, guid: 124a35d5175018b418fa18767eb58388, type: 3}
-      propertyPath: switchOffset
-      value: 0.005
-      objectReference: {fileID: 0}
-    - target: {fileID: 7335944022125662858, guid: 124a35d5175018b418fa18767eb58388, type: 3}
-      propertyPath: trackBuilder
-      value: 
-      objectReference: {fileID: 249658845}
-    - target: {fileID: 7335944022125662858, guid: 124a35d5175018b418fa18767eb58388, type: 3}
-      propertyPath: startingPoint
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7335944022125662858, guid: 124a35d5175018b418fa18767eb58388, type: 3}
-      propertyPath: turnThreshold
-      value: 0.001
-      objectReference: {fileID: 0}
-    - target: {fileID: 7335944022125662858, guid: 124a35d5175018b418fa18767eb58388, type: 3}
-      propertyPath: switchLineDistance
-      value: 0.005
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 124a35d5175018b418fa18767eb58388, type: 3}
 --- !u!1001 &6918778088052695588
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19467,43 +19261,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7335944022125662858, guid: 124a35d5175018b418fa18767eb58388, type: 3}
       propertyPath: speed
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7335944022125662858, guid: 124a35d5175018b418fa18767eb58388, type: 3}
-      propertyPath: maxAngle
-      value: 45
-      objectReference: {fileID: 0}
-    - target: {fileID: 7335944022125662858, guid: 124a35d5175018b418fa18767eb58388, type: 3}
-      propertyPath: maxLength
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7335944022125662858, guid: 124a35d5175018b418fa18767eb58388, type: 3}
-      propertyPath: nextIndex
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7335944022125662858, guid: 124a35d5175018b418fa18767eb58388, type: 3}
-      propertyPath: currentIndex
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7335944022125662858, guid: 124a35d5175018b418fa18767eb58388, type: 3}
-      propertyPath: switchOffset
-      value: 0.005
       objectReference: {fileID: 0}
     - target: {fileID: 7335944022125662858, guid: 124a35d5175018b418fa18767eb58388, type: 3}
       propertyPath: trackBuilder
       value: 
       objectReference: {fileID: 249658845}
     - target: {fileID: 7335944022125662858, guid: 124a35d5175018b418fa18767eb58388, type: 3}
+      propertyPath: rotationSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7335944022125662858, guid: 124a35d5175018b418fa18767eb58388, type: 3}
       propertyPath: startingPoint
-      value: 0
+      value: 0.95
       objectReference: {fileID: 0}
     - target: {fileID: 7335944022125662858, guid: 124a35d5175018b418fa18767eb58388, type: 3}
-      propertyPath: turnThreshold
-      value: 0.001
+      propertyPath: lineChangePercantage
+      value: 0.495
       objectReference: {fileID: 0}
     - target: {fileID: 7335944022125662858, guid: 124a35d5175018b418fa18767eb58388, type: 3}
-      propertyPath: switchLineDistance
-      value: 0.005
+      propertyPath: maxAngleChangePerFrame
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

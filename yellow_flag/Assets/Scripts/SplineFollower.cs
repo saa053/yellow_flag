@@ -1,30 +1,39 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Splines;
-using UnityEngine.UIElements;
 
 public class SplineFollower : MonoBehaviour
 {
     [SerializeField] TrackBuilder trackBuilder;
+
+    // Movement variables
     [SerializeField] float speed;
     [SerializeField] float startingPoint;
     [SerializeField] float turnThreshold;
     [SerializeField] float imageRotation;
 
+    [SerializeField] float rotationSpeed;
+
+    [SerializeField] float maxAngleChangePerFrame;
+    [SerializeField] float lineChangePercantage;
+    public float distance; // Percentage travelled of line
+
+    // Variables for handling line switching
     [SerializeField] TrackBuilder.RacingLine currentIndex;
     [SerializeField] TrackBuilder.RacingLine nextIndex;
     [SerializeField] float switchOffset;
     [SerializeField] float maxAngle;
     [SerializeField] float maxLength;
     [SerializeField] float minLength;
+    float targetDistance; // Percentage travelled of target line. Used to determine where the car will end up when switching lines
 
+    // Splines
     SplineContainer splineContainer;
     Spline currentLine;
     Spline nextLine;
     Spline switchLine;
 
-    float distance;
-    float targetDistance;
+    // Variable for checking if track has been initialized
     bool init = false;
 
     void Start() {
@@ -32,58 +41,81 @@ public class SplineFollower : MonoBehaviour
 
         splineContainer = trackBuilder.GetComponent<SplineContainer>();
 
-        // Error handling
+        // Check if there are enough splines for the cars
         int index = transform.GetSiblingIndex() + 3;
         if (index >= splineContainer.Splines.Count){
             Debug.Log("ERROR: There are more cars than splines (No more switchLine splines left to use)");
             return;
         }
 
-        switchLine = splineContainer.Splines[transform.GetSiblingIndex() + 3];
-
         distance = startingPoint;
 
         currentLine = splineContainer.Splines[(int)currentIndex];
         nextLine = currentLine;
+        switchLine = splineContainer.Splines[transform.GetSiblingIndex() + 3];
 
         init = true;
+        // transform.rotation = Quaternion.Euler(0, 0, 60); // TMP
     }
 
     void Update() {
         if (!init)
             return;
 
-        if (distance > 1f) {
-            distance = 0f;
-        }
-
-        if (currentLine == switchLine && distance > 0.5f){
-            currentLine = nextLine;
-            switchLine.Clear();
-            distance = targetDistance;
-
-            currentIndex = nextIndex;
-        }
-
         Move(currentLine);
 
+        if (0.1 < distance && 0.101 > distance)
+            nextIndex = TrackBuilder.RacingLine.left;
+
+        if (0.2 < distance && 0.201 > distance)
+            nextIndex = TrackBuilder.RacingLine.right;
+
+        if (0.25 < distance && 0.251 > distance)
+            nextIndex = TrackBuilder.RacingLine.left;
+
+        if (0.3 < distance && 0.301 > distance)
+            nextIndex = TrackBuilder.RacingLine.right;
+
+        if (0.4 < distance && 0.401 > distance)
+            nextIndex = TrackBuilder.RacingLine.left;
+
+        if (0.5 < distance && 0.501 > distance)
+        nextIndex = TrackBuilder.RacingLine.right;
+
+        if (0.6 < distance && 0.601 > distance)
+            nextIndex = TrackBuilder.RacingLine.optimal;
 
         nextLine = splineContainer.Splines[(int)nextIndex];
-        if (currentLine != nextLine && currentLine != switchLine){
-            SwitchLine();
+        if (currentLine != nextLine){
+            HandleSwitching();
         }
     }
 
+    // Moves and updates the cars position to follow the line given
     void Move(Spline spline) {
+        // Update position
         distance += speed * Time.deltaTime / spline.GetLength();
+        distance %= 1f; // TMP
         Vector3 currentPosition = spline.EvaluatePosition(distance);
         transform.position = new Vector3(currentPosition.x, currentPosition.y, 0);
 
+        // Rotate
         Vector3 nextPosition = spline.EvaluatePosition(distance + turnThreshold);
         Vector3 direction = nextPosition - currentPosition;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        
+        // Solution 1 TMP
+/*         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        Quaternion targetRotation = Quaternion.Euler(0, 0, angle + imageRotation);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime); */
+        
+        // Solution 2 TMP
+        float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + imageRotation;
+        float angleChange = Mathf.DeltaAngle(transform.rotation.eulerAngles.z, targetAngle);
+        angleChange = Mathf.Clamp(angleChange, -maxAngleChangePerFrame, maxAngleChangePerFrame);
+        transform.rotation = Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z + angleChange);
 
-        transform.rotation = Quaternion.Euler(0, 0, angle + imageRotation);
+        
+
     }
 
     void BreakAndAccelerate() {
@@ -92,106 +124,120 @@ public class SplineFollower : MonoBehaviour
         //float knotT = distance / splineLength;
     }
 
-    void SwitchLine() {
-/*         if (transform.position too close apex) {
-            return;
-        } */
+    // Moves the car smoothly from currentLine to nextLine
+    void HandleSwitching() {
+        if (currentLine == switchLine) {
+            // Check if car is at the end of switchLine (Since spline is set to loop, the end is 0.5f)
+            if (distance > lineChangePercantage){
+                // Clear switchLine and set to follow the spline switching to
+                currentLine = nextLine;
+                switchLine.Clear();
+                distance = targetDistance;
+                currentIndex = nextIndex;
+            }
+        } else {
+            bool res = UpdateTargetDistance();
+            if (!res)
+                return;
 
+            CreateSwitchLine();
+            distance = 0;
+            currentLine = switchLine;
+        }
+    }
+
+    // Calculates the targetDistance for the line switch
+    bool UpdateTargetDistance() {
         Vector3 nextPosition = currentLine.EvaluatePosition(distance + turnThreshold);
         Vector2 direction = nextPosition - transform.position;
-        Vector2 direction2 = direction;
+        Vector2 directionToTarget;
+
         int failSafe = 0;
         targetDistance = distance;
         
+        // Adds an offset to targetDistance until the angle and length the car will have to drive to switch lines is acceptable (maxAngle, minLength). Fails if targetDistance is far away from current position
         for (Vector3 targetPos = nextLine.EvaluatePosition(distance); Vector2.Distance(targetPos, transform.position) < maxLength; targetPos = nextLine.EvaluatePosition(targetDistance)) {
-            direction2 = targetPos - transform.position;
+            directionToTarget = targetPos - transform.position;
 
-            float angle = Vector3.Angle(direction, direction2);
-            float sign = Mathf.Sign(Vector3.Dot(Vector3.Cross(direction, direction2), Vector3.up));
+            // Calculate switch line angle where 0 = direction
+            float angle = Vector3.Angle(direction, directionToTarget);
+            float sign = Mathf.Sign(Vector3.Dot(Vector3.Cross(direction, directionToTarget), Vector3.up));
             angle *= sign;
 
-            if (angle < maxAngle && Vector2.Distance(targetPos, transform.position) >= minLength) {
-                Debug.Log("Angle: " + angle + " = SWITCHING" + " | Length: " + Vector2.Distance(targetPos, transform.position));
-                CreateSwitchLine();
-                return;
-            }
+            // Switch line if angle and length of switchLine is acceptable
+            if (angle < maxAngle && Vector2.Distance(targetPos, transform.position) >= minLength)
+                return true;
 
-            Debug.Log("Angle: " + angle + " = Adding offset" + " | Length: " + Vector2.Distance(targetPos, transform.position));
+            // Add offset to target to create a better angle next loop
             targetDistance = targetDistance + switchOffset;
-            failSafe++;
 
-            if (failSafe > 20) {
+            // Error handling
+            failSafe++;
+            if (failSafe > 100) {
                 nextLine = currentLine;
                 nextIndex = currentIndex;
-                return;
+                Debug.Log("SwitchLine stuck in loop");
+                return false;
             }
         }
 
         nextLine = currentLine;
         nextIndex = currentIndex;
 
-        Debug.Log("Aborting switch");
+        Debug.Log("Can't switch");
+        return false;
     }
 
+    // Creates a line from current position to targetDistance on the line its switching to
     void CreateSwitchLine() {
-        float currentLength = currentLine.GetLength();
-        float nextLength = nextLine.GetLength();
-
-
-        Vector3 knot1Pos = currentLine.EvaluatePosition(distance);
-        BezierKnot knot1 = new BezierKnot(new Vector3(knot1Pos.x, knot1Pos.y), 0, 0, Quaternion.Euler(-90, 0, 0));
+        Vector3 startPos = currentLine.EvaluatePosition(distance);
+        Vector3 targetPos = nextLine.EvaluatePosition(targetDistance);
+        Vector3 halfwayPos = Vector3.Lerp(transform.position, targetPos, 0.5f);
         
-        Vector3 knot5Pos = nextLine.EvaluatePosition(targetDistance);
-        BezierKnot knot5 = new BezierKnot(new Vector3(knot5Pos.x, knot5Pos.y), 0, 0, Quaternion.Euler(-90, 0, 0));
+        Vector3 knot1 = Vector3.Lerp(
+            currentLine.EvaluatePosition(distance + switchOffset / 6), 
+            halfwayPos, 
+            0.1f);
 
-        Vector3 knot3Pos = Vector3.Lerp(transform.position, knot5Pos, 0.5f);
-        BezierKnot knot3 = new BezierKnot(new Vector3(knot3Pos.x, knot3Pos.y), 0, 0, Quaternion.Euler(-90, 0, 0));
+        Vector3 knot2 = Vector3.Lerp(
+            currentLine.EvaluatePosition(distance + switchOffset / 5), 
+            halfwayPos, 
+            0.5f);
 
-        Vector3 lerpPos = currentLine.EvaluatePosition(distance + switchOffset / 5);
-        Vector3 knot2Pos = Vector3.Lerp(lerpPos, knot3Pos, 0.5f);
-        BezierKnot knot2 = new BezierKnot(new Vector3(knot2Pos.x, knot2Pos.y), 0, 0, Quaternion.Euler(-90, 0, 0));
+        Vector3 knot4 = Vector3.Lerp(
+            nextLine.EvaluatePosition(targetDistance - switchOffset / 5), 
+            halfwayPos, 
+            0.5f);
 
-        lerpPos = nextLine.EvaluatePosition(targetDistance - switchOffset / 5);
-        Vector3 knot4Pos = Vector3.Lerp(lerpPos, knot3Pos, 0.5f);
-        BezierKnot knot4 = new BezierKnot(new Vector3(knot4Pos.x, knot4Pos.y), 0, 0, Quaternion.Euler(-90, 0, 0));
-
-        lerpPos = nextLine.EvaluatePosition(targetDistance - switchOffset / 6);
-        Vector3 knot6Pos = Vector3.Lerp(lerpPos, knot3Pos, 0.1f);
-        BezierKnot knot6 = new BezierKnot(new Vector3(knot6Pos.x, knot6Pos.y), 0, 0, Quaternion.Euler(-90, 0, 0));
-
-        lerpPos = currentLine.EvaluatePosition(distance + switchOffset / 6);
-        Vector3 knot7Pos = Vector3.Lerp(lerpPos, knot3Pos, 0.1f);
-        BezierKnot knot7 = new BezierKnot(new Vector3(knot7Pos.x, knot7Pos.y), 0, 0, Quaternion.Euler(-90, 0, 0));
-
-        switchLine.Add(knot1, TangentMode.Linear);
-        switchLine.Add(knot7, TangentMode.AutoSmooth);
-        switchLine.Add(knot2, TangentMode.AutoSmooth);
-        switchLine.Add(knot3, TangentMode.AutoSmooth);
-        switchLine.Add(knot4, TangentMode.AutoSmooth);
-        switchLine.Add(knot6, TangentMode.AutoSmooth);
-        switchLine.Add(knot5, TangentMode.Linear);
-
-        distance = 0f;
-        currentLine = switchLine;
+        Vector3 knot5 = Vector3.Lerp(
+            nextLine.EvaluatePosition(targetDistance - switchOffset / 6), 
+            halfwayPos, 
+            0.1f);
+        
+        AddKnot(startPos, false);
+        AddKnot(knot1, true);
+        AddKnot(knot2, true);
+        AddKnot(halfwayPos, true);
+        AddKnot(knot4, true);
+        AddKnot(knot5, true);
+        AddKnot(targetPos, false);
     }
 
+    // Helper function for creating and adding BezierKnot to switchLine
+    void AddKnot(Vector3 pos, bool auto) {
+        TangentMode tangentMode;
+        if (auto)
+            tangentMode = TangentMode.AutoSmooth;
+        else {
+            tangentMode = TangentMode.Linear;
+        }
+
+        switchLine.Add(new BezierKnot(pos, 0, 0, Quaternion.Euler(-90, 0, 0)), tangentMode);
+    }
+
+    // Waits until the track is completed before continuing
     private IEnumerator InitializeAfterBuild() {
     while (!trackBuilder.buildCompleted)
         yield return null;
-    }
-
-    // Calculate the intersection point between two lines
-    Vector3 CalculateIntersectionPoint(Vector3 p1, Vector3 d1, Vector3 p2, Vector3 d2)
-    {
-        Vector3 line1 = p1 - p2;
-        float cross = Vector3.Cross(d1, d2).magnitude;
-
-        if (cross < 1e-5f) // Lines are parallel
-        {
-            return Vector3.zero; // No intersection point
-        }
-
-        float t1 = Vector3.Cross(line1, d2).magnitude / cross;
-        return p1 + d1 * t1;
     }
 }

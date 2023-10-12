@@ -98,11 +98,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trackBuilder: {fileID: 0}
-  speed: 1
-  startingPoint: 0.2
+  speed: 0.7
+  startingPoint: 0
   turnThreshold: 0.001
   imageRotation: -90
-  currentLine: 0
-  nextLine: 0
-  switchLine: 0
-  distancePercentage: 0
+  distance: 0
+  currentIndex: 0
+  nextIndex: 0
+  switchOffset: 0.005
+  maxAngle: 45
+  maxLength: 1
+  minLength: 0.5
