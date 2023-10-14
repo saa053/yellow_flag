@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Splines;
 
@@ -11,11 +12,7 @@ public class SplineFollower : MonoBehaviour
     [SerializeField] float startingPoint;
     [SerializeField] float turnThreshold;
     [SerializeField] float imageRotation;
-
     [SerializeField] float rotationSpeed;
-
-    [SerializeField] float maxAngleChangePerFrame;
-    [SerializeField] float lineChangePercantage;
     public float distance; // Percentage travelled of line
 
     // Variables for handling line switching
@@ -35,6 +32,7 @@ public class SplineFollower : MonoBehaviour
 
     // Variable for checking if track has been initialized
     bool init = false;
+    bool isStartPositionSet = false;
 
     void Start() {
         StartCoroutine(InitializeAfterBuild());
@@ -50,40 +48,22 @@ public class SplineFollower : MonoBehaviour
 
         distance = startingPoint;
 
+        // Initialize splines
         currentLine = splineContainer.Splines[(int)currentIndex];
         nextLine = currentLine;
         switchLine = splineContainer.Splines[transform.GetSiblingIndex() + 3];
 
         init = true;
-        // transform.rotation = Quaternion.Euler(0, 0, 60); // TMP
     }
 
     void Update() {
         if (!init)
             return;
+        
+        if (!isStartPositionSet)
+            setStartPosition(currentLine);
 
         Move(currentLine);
-
-        if (0.1 < distance && 0.101 > distance)
-            nextIndex = TrackBuilder.RacingLine.left;
-
-        if (0.2 < distance && 0.201 > distance)
-            nextIndex = TrackBuilder.RacingLine.right;
-
-        if (0.25 < distance && 0.251 > distance)
-            nextIndex = TrackBuilder.RacingLine.left;
-
-        if (0.3 < distance && 0.301 > distance)
-            nextIndex = TrackBuilder.RacingLine.right;
-
-        if (0.4 < distance && 0.401 > distance)
-            nextIndex = TrackBuilder.RacingLine.left;
-
-        if (0.5 < distance && 0.501 > distance)
-        nextIndex = TrackBuilder.RacingLine.right;
-
-        if (0.6 < distance && 0.601 > distance)
-            nextIndex = TrackBuilder.RacingLine.optimal;
 
         nextLine = splineContainer.Splines[(int)nextIndex];
         if (currentLine != nextLine){
@@ -95,27 +75,17 @@ public class SplineFollower : MonoBehaviour
     void Move(Spline spline) {
         // Update position
         distance += speed * Time.deltaTime / spline.GetLength();
-        distance %= 1f; // TMP
+        distance %= 1f;
         Vector3 currentPosition = spline.EvaluatePosition(distance);
         transform.position = new Vector3(currentPosition.x, currentPosition.y, 0);
 
-        // Rotate
+        // Rotate smoothly
         Vector3 nextPosition = spline.EvaluatePosition(distance + turnThreshold);
         Vector3 direction = nextPosition - currentPosition;
-        
-        // Solution 1 TMP
-/*         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        Quaternion targetRotation = Quaternion.Euler(0, 0, angle + imageRotation);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime); */
-        
-        // Solution 2 TMP
         float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + imageRotation;
         float angleChange = Mathf.DeltaAngle(transform.rotation.eulerAngles.z, targetAngle);
-        angleChange = Mathf.Clamp(angleChange, -maxAngleChangePerFrame, maxAngleChangePerFrame);
+        angleChange = Mathf.Clamp(angleChange, -rotationSpeed, rotationSpeed);
         transform.rotation = Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z + angleChange);
-
-        
-
     }
 
     void BreakAndAccelerate() {
@@ -128,7 +98,7 @@ public class SplineFollower : MonoBehaviour
     void HandleSwitching() {
         if (currentLine == switchLine) {
             // Check if car is at the end of switchLine (Since spline is set to loop, the end is 0.5f)
-            if (distance > lineChangePercantage){
+            if (distance > 0.5f){
                 // Clear switchLine and set to follow the spline switching to
                 currentLine = nextLine;
                 switchLine.Clear();
@@ -195,22 +165,22 @@ public class SplineFollower : MonoBehaviour
         Vector3 halfwayPos = Vector3.Lerp(transform.position, targetPos, 0.5f);
         
         Vector3 knot1 = Vector3.Lerp(
-            currentLine.EvaluatePosition(distance + switchOffset / 6), 
+            currentLine.EvaluatePosition(distance + switchOffset / 3), 
             halfwayPos, 
             0.1f);
 
         Vector3 knot2 = Vector3.Lerp(
-            currentLine.EvaluatePosition(distance + switchOffset / 5), 
+            currentLine.EvaluatePosition(distance + switchOffset / 3), 
             halfwayPos, 
             0.5f);
 
         Vector3 knot4 = Vector3.Lerp(
-            nextLine.EvaluatePosition(targetDistance - switchOffset / 5), 
+            nextLine.EvaluatePosition(targetDistance - switchOffset / 3), 
             halfwayPos, 
             0.5f);
 
         Vector3 knot5 = Vector3.Lerp(
-            nextLine.EvaluatePosition(targetDistance - switchOffset / 6), 
+            nextLine.EvaluatePosition(targetDistance - switchOffset / 3), 
             halfwayPos, 
             0.1f);
         
@@ -233,6 +203,21 @@ public class SplineFollower : MonoBehaviour
         }
 
         switchLine.Add(new BezierKnot(pos, 0, 0, Quaternion.Euler(-90, 0, 0)), tangentMode);
+    }
+
+    // Sets the transform to start position and rotation
+    void setStartPosition(Spline spline) {
+        // Move to grid
+        // TODO
+
+        // Rotate
+        Vector3 currentPosition = spline.EvaluatePosition(distance);
+        Vector3 nextPosition = spline.EvaluatePosition(distance + turnThreshold);
+        Vector3 direction = nextPosition - currentPosition;
+        float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + imageRotation;
+        transform.rotation = Quaternion.Euler(0, 0, targetAngle);
+
+        isStartPositionSet = true;
     }
 
     // Waits until the track is completed before continuing

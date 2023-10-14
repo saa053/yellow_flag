@@ -19261,7 +19261,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7335944022125662858, guid: 124a35d5175018b418fa18767eb58388, type: 3}
       propertyPath: speed
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7335944022125662858, guid: 124a35d5175018b418fa18767eb58388, type: 3}
       propertyPath: trackBuilder
@@ -19269,11 +19269,11 @@ PrefabInstance:
       objectReference: {fileID: 249658845}
     - target: {fileID: 7335944022125662858, guid: 124a35d5175018b418fa18767eb58388, type: 3}
       propertyPath: rotationSpeed
-      value: 10
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7335944022125662858, guid: 124a35d5175018b418fa18767eb58388, type: 3}
       propertyPath: startingPoint
-      value: 0.95
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7335944022125662858, guid: 124a35d5175018b418fa18767eb58388, type: 3}
       propertyPath: lineChangePercantage
