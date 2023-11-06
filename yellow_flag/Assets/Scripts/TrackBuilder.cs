@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Splines;
 
@@ -6,9 +7,23 @@ public class TrackBuilder : MonoBehaviour
 {
     [SerializeField] TileManager tileManager;
     [SerializeField] float spaceBetweenRacingLines;
+
+    [SerializeField] float hairpinCorneringSpeed;
+    [SerializeField] float turnCorneringSpeed;
+    [SerializeField] float maggotsAndBeckettsSpeed;
+
+    [SerializeField] float longTurnCorneringSpeed;
     SplineContainer splineContainer;
 
-    public List<int> apexKnots = new List<int>();
+    public struct Apex {
+        public int knotIndex;
+        public Type type;
+        public float rotation;
+        public float corneringSpeed;
+    }
+
+    public List<Apex> apexes = new List<Apex>();
+    // public List<int> apexKnots = new List<int>();
     public enum RacingLine {
         optimal,
         left,
@@ -21,6 +36,11 @@ public class TrackBuilder : MonoBehaviour
         splineContainer = GetComponent<SplineContainer>();
        
         CreateRacingLines();
+        CalculateCorneringSpeeds();
+
+        foreach (Apex apex in apexes) {
+            Debug.Log(apex.knotIndex + ": " + apex.corneringSpeed);
+        }
 
         foreach (Spline spline in splineContainer.Splines) {
             spline.SetTangentMode(TangentMode.AutoSmooth);
@@ -143,7 +163,20 @@ public class TrackBuilder : MonoBehaviour
         // Add turn and hairpin knots to apex list
         Type type = tileManager.GetType(tilePos);
         if (type == Type.hairpin || type == Type.turn) {
-            apexKnots.Add(knotIndex);
+            //apexKnots.Add(knotIndex);
+
+            Apex apex;
+
+            apex.knotIndex = knotIndex;
+            apex.type = type;
+            apex.rotation = tileManager.GetRotation(tilePos);
+            
+            if (type == Type.hairpin)
+                apex.corneringSpeed = hairpinCorneringSpeed;
+            else
+                apex.corneringSpeed = turnCorneringSpeed;
+
+            apexes.Add(apex);
         }
     }
 
@@ -209,5 +242,39 @@ public class TrackBuilder : MonoBehaviour
         float crossProduct = Vector2.Dot(referenceToleft, new Vector2(-referenceToOptimal.y, referenceToOptimal.x));
         
         return crossProduct;
+    }
+
+
+    void CalculateCorneringSpeeds() {
+        for (int i = 0; i < apexes.Count; i++) {
+            Apex apex = apexes[i];
+            if (apex.type != Type.turn)
+                continue;
+
+
+            if (i > 0) {
+                Apex lastApex = apexes[i - 1];
+
+                if (lastApex.type == Type.turn && apex.knotIndex - 1 == lastApex.knotIndex) {
+                    apex.corneringSpeed = lastApex.corneringSpeed;
+                    apexes[i] = apex;
+                    continue;
+                }
+            }
+
+            if (i + 1 < apexes.Count) {
+                Apex nextApex = apexes[i + 1];
+
+                if (nextApex.type == Type.turn && apex.knotIndex + 1 == nextApex.knotIndex) {
+                    if (Mathf.Abs(apex.rotation - nextApex.rotation) == 180) {
+                        apex.corneringSpeed = maggotsAndBeckettsSpeed;
+                        apexes[i] = apex;
+                    } else {
+                        apex.corneringSpeed = longTurnCorneringSpeed;
+                        apexes[i] = apex;
+                    }
+                }
+            }
+        }
     }
 }

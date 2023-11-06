@@ -15,6 +15,10 @@ public class SplineFollower : MonoBehaviour
     [SerializeField] float rotationSpeed;
     public float distance; // Percentage travelled of line
 
+    // Brake and accelerate variables
+    [SerializeField] float breakPower;
+    [SerializeField] float acceleratePower;
+
     // Variables for handling line switching
     [SerializeField] TrackBuilder.RacingLine currentIndex;
     [SerializeField] TrackBuilder.RacingLine nextIndex;
@@ -63,7 +67,10 @@ public class SplineFollower : MonoBehaviour
         if (!isStartPositionSet)
             setStartPosition(currentLine);
 
+        
         Move(currentLine);
+
+        BreakAndAccelerate(currentLine);
 
         nextLine = splineContainer.Splines[(int)nextIndex];
         if (currentLine != nextLine){
@@ -88,10 +95,34 @@ public class SplineFollower : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z + angleChange);
     }
 
-    void BreakAndAccelerate() {
-        // Find distancePerentage of apexKnot
-        //float distance = splineContainer.Splines[0].ConvertIndexUnit(trackBuilder.apexKnots[0], PathIndexUnit.Knot, PathIndexUnit.Distance);
-        //float knotT = distance / splineLength;
+    void BreakAndAccelerate(Spline spline) {
+
+        /* for (int i = currentApex; i < trackBuilder.apexes.Count; i++) {
+            TrackBuilder.Apex apex = trackBuilder.apexes[i];
+
+            float ukjentVaribel = spline.ConvertIndexUnit(apex.knotIndex, PathIndexUnit.Knot, PathIndexUnit.Distance);
+            float apexDistance = ukjentVaribel / spline.GetLength();
+            float distanceToBreakPoint = apexDistance - distance;
+
+            // Calculate brakingPoint
+        } */
+
+
+        /* foreach (TrackBuilder.Apex apex in trackBuilder.apexes) {
+            float ukjentVaribel = spline.ConvertIndexUnit(apex.knotIndex, PathIndexUnit.Knot, PathIndexUnit.Distance);
+            float apexDistance = ukjentVaribel / spline.GetLength();
+            float distanceToBreakPoint = apexDistance - distance;
+
+            if (distanceToBreakPoint <= breakPoint && distanceToBreakPoint > 0) {
+                speed -= breakPower;
+                Debug.Log("BRAKING");
+            } else if (distanceToBreakPoint > -breakPoint && distanceToBreakPoint <= 0) {
+                speed += acceleratePower;
+                Debug.Log("ACCELERATING");
+            }
+        } */
+
+
     }
 
     // Moves the car smoothly from currentLine to nextLine
