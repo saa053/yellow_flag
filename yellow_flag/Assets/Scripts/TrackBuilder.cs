@@ -38,9 +38,6 @@ public class TrackBuilder : MonoBehaviour
         CreateRacingLines();
         CalculateCorneringSpeeds();
 
-        foreach (Apex apex in apexes) {
-            Debug.Log(apex.knotIndex + ": " + apex.corneringSpeed);
-        }
 
         foreach (Spline spline in splineContainer.Splines) {
             spline.SetTangentMode(TangentMode.AutoSmooth);

@@ -5967,16 +5967,6 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
-  - first: {x: 4, y: 42, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 39
-      m_TileSpriteIndex: 27
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      dummyAlignment: 0
-      m_AllTileFlags: 1073741825
   - first: {x: 5, y: 42, z: 0}
     second:
       serializedVersion: 2
@@ -8692,6 +8682,16 @@ Tilemap:
       serializedVersion: 2
       m_TileIndex: 1
       m_TileSpriteIndex: 1
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: -27, y: 49, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 39
+      m_TileSpriteIndex: 27
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -18698,7 +18698,7 @@ Tilemap:
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: e4578a3a77a0cf14c8789f3f3f39e841, type: 2}
   - m_RefCount: 1
-    m_Data: {fileID: 11400000, guid: 89d3aa1751b1d4e4f97bb3fa9f3c439d, type: 2}
+    m_Data: {fileID: 11400000, guid: 5fbe59bb0dda899478c45e1ced598ee2, type: 2}
   m_TileSpriteArray:
   - m_RefCount: 19
     m_Data: {fileID: 21300000, guid: e7b8ebd242d129340bd7703767e4927a, type: 3}
@@ -18755,7 +18755,7 @@ Tilemap:
   - m_RefCount: 1
     m_Data: {fileID: 21300000, guid: 183c2881cf0f62040a8f3cebb7b8b617, type: 3}
   - m_RefCount: 1
-    m_Data: {fileID: 21300000, guid: 4a6597000829a2f4ebff71ab4b239b72, type: 3}
+    m_Data: {fileID: 21300000, guid: c80f8333d7481144cb17026caf3ca6e7, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 21300000, guid: 9a915c1e48d06744fba54070fe2d2bab, type: 3}
   - m_RefCount: 2
@@ -18937,6 +18937,14 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7335944022125662858, guid: 124a35d5175018b418fa18767eb58388, type: 3}
+      propertyPath: maxSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7335944022125662858, guid: 124a35d5175018b418fa18767eb58388, type: 3}
+      propertyPath: brakePower
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7335944022125662858, guid: 124a35d5175018b418fa18767eb58388, type: 3}
       propertyPath: breakPoint
       value: 0.04
       objectReference: {fileID: 0}
@@ -18950,7 +18958,11 @@ PrefabInstance:
       objectReference: {fileID: 249658845}
     - target: {fileID: 7335944022125662858, guid: 124a35d5175018b418fa18767eb58388, type: 3}
       propertyPath: acceleratePower
-      value: 0.001
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7335944022125662858, guid: 124a35d5175018b418fa18767eb58388, type: 3}
+      propertyPath: reachCorneringSpeedBeforeApexOffset
+      value: 0.01
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

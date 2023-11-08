@@ -9,6 +9,7 @@ public class SplineFollower : MonoBehaviour
 
     // Movement variables
     [SerializeField] float speed;
+    [SerializeField] float maxSpeed;
     [SerializeField] float startingPoint;
     [SerializeField] float turnThreshold;
     [SerializeField] float imageRotation;
@@ -16,8 +17,15 @@ public class SplineFollower : MonoBehaviour
     public float distance; // Percentage travelled of line
 
     // Brake and accelerate variables
-    [SerializeField] float breakPower;
+    [SerializeField] float brakePower;
     [SerializeField] float acceleratePower;
+
+    bool braking = false;
+
+    [SerializeField] float reachCorneringSpeedBeforeApexOffset;
+
+    float initialSpeed;
+    int apexIndex = 0;
 
     // Variables for handling line switching
     [SerializeField] TrackBuilder.RacingLine currentIndex;
@@ -50,6 +58,7 @@ public class SplineFollower : MonoBehaviour
             return;
         }
 
+        initialSpeed = speed;
         distance = startingPoint;
 
         // Initialize splines
@@ -67,7 +76,14 @@ public class SplineFollower : MonoBehaviour
         if (!isStartPositionSet)
             setStartPosition(currentLine);
 
+
         
+        distance += speed * Time.deltaTime / currentLine.GetLength();
+        if (distance > 1f) {
+            distance = 0;
+            apexIndex = 0;
+        }
+
         Move(currentLine);
 
         BreakAndAccelerate(currentLine);
@@ -81,8 +97,6 @@ public class SplineFollower : MonoBehaviour
     // Moves and updates the cars position to follow the line given
     void Move(Spline spline) {
         // Update position
-        distance += speed * Time.deltaTime / spline.GetLength();
-        distance %= 1f;
         Vector3 currentPosition = spline.EvaluatePosition(distance);
         transform.position = new Vector3(currentPosition.x, currentPosition.y, 0);
 
@@ -96,33 +110,56 @@ public class SplineFollower : MonoBehaviour
     }
 
     void BreakAndAccelerate(Spline spline) {
+        // Accelerate
+        if (!braking && speed < maxSpeed) {
+            speed += acceleratePower * Time.deltaTime;
 
-        /* for (int i = currentApex; i < trackBuilder.apexes.Count; i++) {
-            TrackBuilder.Apex apex = trackBuilder.apexes[i];
-
-            float ukjentVaribel = spline.ConvertIndexUnit(apex.knotIndex, PathIndexUnit.Knot, PathIndexUnit.Distance);
-            float apexDistance = ukjentVaribel / spline.GetLength();
-            float distanceToBreakPoint = apexDistance - distance;
-
-            // Calculate brakingPoint
-        } */
-
-
-        /* foreach (TrackBuilder.Apex apex in trackBuilder.apexes) {
-            float ukjentVaribel = spline.ConvertIndexUnit(apex.knotIndex, PathIndexUnit.Knot, PathIndexUnit.Distance);
-            float apexDistance = ukjentVaribel / spline.GetLength();
-            float distanceToBreakPoint = apexDistance - distance;
-
-            if (distanceToBreakPoint <= breakPoint && distanceToBreakPoint > 0) {
-                speed -= breakPower;
-                Debug.Log("BRAKING");
-            } else if (distanceToBreakPoint > -breakPoint && distanceToBreakPoint <= 0) {
-                speed += acceleratePower;
-                Debug.Log("ACCELERATING");
+            if (speed > maxSpeed) {
+                speed = maxSpeed;
             }
-        } */
+        }
 
 
+        if (apexIndex >= trackBuilder.apexes.Count)
+            return;
+
+        TrackBuilder.Apex apex = trackBuilder.apexes[apexIndex];
+
+        float apexDistance = spline.ConvertIndexUnit(apex.knotIndex, PathIndexUnit.Knot, PathIndexUnit.Distance) / spline.GetLength();;
+        float distanceToApex = apexDistance - distance;
+
+        if (distanceToApex < 0) {
+            braking = false;
+            apexIndex++;
+            
+            return;
+        }
+
+
+        // Find out if the car should brake or not
+        if (speed > apex.corneringSpeed) {
+            if (!braking) {
+                float distanceFromCurrentSpeedToTargetSpeed = ((apex.corneringSpeed * apex.corneringSpeed - speed * speed) / (2f * -brakePower)) / spline.GetLength();
+                float brakeDistance = apexDistance - distanceFromCurrentSpeedToTargetSpeed - reachCorneringSpeedBeforeApexOffset;
+
+                braking = distance >= brakeDistance;
+            }
+        }
+
+
+        // Brake
+        if (braking) {
+            speed -= brakePower * Time.deltaTime;
+
+            if (speed <= apex.corneringSpeed) {
+                speed = apex.corneringSpeed;
+            }
+        }
+
+    }
+
+    float CalculateBrakingDistance(float targetSpeed) {
+        return (speed * speed - targetSpeed * targetSpeed) / (2 * brakePower);
     }
 
     // Moves the car smoothly from currentLine to nextLine
