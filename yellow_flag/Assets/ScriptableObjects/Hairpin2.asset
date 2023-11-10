@@ -18,4 +18,4 @@ MonoBehaviour:
   exits: 0100000002000000
   rotationAngle: 180
   type: 3
-  checkpoint: {x: 0.364, y: 0, z: 0}
+  checkpoint: {x: 0.3, y: 0}

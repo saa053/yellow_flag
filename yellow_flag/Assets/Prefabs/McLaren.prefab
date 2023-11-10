@@ -97,13 +97,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ceac9a6cf2f2234d8475766f90b4454, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prefab: {fileID: 110126078451002794, guid: 38c5f6e562f27bb46bd213c9a7933e08, type: 3}
   trackBuilder: {fileID: 0}
-  speed: 0.5
+  speed: 0
+  maxSpeed: 2.2
   startingPoint: 0
   turnThreshold: 0.001
   imageRotation: -90
   rotationSpeed: 3
   distance: 0
+  brakePower: 0.7
+  acceleratePower: 0.35
+  reachCorneringSpeedBeforeApexOffset: 0.0075
   currentIndex: 0
   nextIndex: 0
   switchOffset: 0.005

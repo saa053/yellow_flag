@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4322662928581186637
+--- !u!1 &2174868387985236862
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,9 +8,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5695411569334160275}
-  - component: {fileID: 6739505420901173560}
-  - component: {fileID: 1216839736713283671}
+  - component: {fileID: 484666636488838831}
+  - component: {fileID: 385436801542035132}
+  - component: {fileID: 6790075742218805111}
   m_Layer: 0
   m_Name: Renault
   m_TagString: Untagged
@@ -18,28 +18,28 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5695411569334160275
+--- !u!4 &484666636488838831
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4322662928581186637}
+  m_GameObject: {fileID: 2174868387985236862}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.35, y: 0.35, z: 0.35}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &6739505420901173560
+--- !u!212 &385436801542035132
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4322662928581186637}
+  m_GameObject: {fileID: 2174868387985236862}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -85,21 +85,32 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1216839736713283671
+--- !u!114 &6790075742218805111
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4322662928581186637}
+  m_GameObject: {fileID: 2174868387985236862}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5ceac9a6cf2f2234d8475766f90b4454, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   trackBuilder: {fileID: 0}
-  speed: 1
-  startingPoint: 21.44
+  speed: 0
+  maxSpeed: 2.2
+  startingPoint: 0.8
   turnThreshold: 0.001
   imageRotation: -90
-  racingLine: 0
+  rotationSpeed: 3
+  distance: 0
+  brakePower: 0.7
+  acceleratePower: 0.35
+  reachCorneringSpeedBeforeApexOffset: 0.0075
+  currentIndex: 1
+  nextIndex: 1
+  switchOffset: 0.005
+  maxAngle: 45
+  maxLength: 1
+  minLength: 0.5

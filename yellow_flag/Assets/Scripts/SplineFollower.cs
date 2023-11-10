@@ -24,7 +24,6 @@ public class SplineFollower : MonoBehaviour
 
     [SerializeField] float reachCorneringSpeedBeforeApexOffset;
 
-    float initialSpeed;
     int apexIndex = 0;
 
     // Variables for handling line switching
@@ -58,7 +57,6 @@ public class SplineFollower : MonoBehaviour
             return;
         }
 
-        initialSpeed = speed;
         distance = startingPoint;
 
         // Initialize splines
@@ -124,6 +122,7 @@ public class SplineFollower : MonoBehaviour
             return;
 
         TrackBuilder.Apex apex = trackBuilder.apexes[apexIndex];
+        float targetSpeed = apex.corneringSpeed * maxSpeed;
 
         float apexDistance = spline.ConvertIndexUnit(apex.knotIndex, PathIndexUnit.Knot, PathIndexUnit.Distance) / spline.GetLength();;
         float distanceToApex = apexDistance - distance;
@@ -137,9 +136,9 @@ public class SplineFollower : MonoBehaviour
 
 
         // Find out if the car should brake or not
-        if (speed > apex.corneringSpeed) {
+        if (speed > targetSpeed) {
             if (!braking) {
-                float distanceFromCurrentSpeedToTargetSpeed = ((apex.corneringSpeed * apex.corneringSpeed - speed * speed) / (2f * -brakePower)) / spline.GetLength();
+                float distanceFromCurrentSpeedToTargetSpeed = ((targetSpeed * targetSpeed - speed * speed) / (2f * -brakePower)) / spline.GetLength();
                 float brakeDistance = apexDistance - distanceFromCurrentSpeedToTargetSpeed - reachCorneringSpeedBeforeApexOffset;
 
                 braking = distance >= brakeDistance;
@@ -150,16 +149,12 @@ public class SplineFollower : MonoBehaviour
         // Brake
         if (braking) {
             speed -= brakePower * Time.deltaTime;
-
-            if (speed <= apex.corneringSpeed) {
-                speed = apex.corneringSpeed;
+            
+            if (speed <= targetSpeed) {
+                speed = targetSpeed;
             }
         }
 
-    }
-
-    float CalculateBrakingDistance(float targetSpeed) {
-        return (speed * speed - targetSpeed * targetSpeed) / (2 * brakePower);
     }
 
     // Moves the car smoothly from currentLine to nextLine
